@@ -1,0 +1,66 @@
+﻿@inherits LayoutComponentBase
+
+<MudThemeProvider IsDarkMode="true" Theme="@mudTheme" />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<MudLayout>
+    <MudAppBar Fixed="true" Elevation="1">
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@ToggleDrawer" />
+        <MudSpacer />
+        <MudImage Src="img/LEGION.png" Alt="LEGION" Width="164" Height="32" Class="legion-lg" Link="https://www.youtube.com/watch?v=dQw4w9WgXcQ" />
+    </MudAppBar>
+    <MudDrawer @bind-Open="@_opento" Elevation="1" Variant="@DrawerVariant.Responsive">
+        <MudDrawerHeader>
+            <MudText Typo="Typo.h6">LEGION</MudText>
+        </MudDrawerHeader>
+        <MudNavMenu>
+            <MudNavLink Match="NavLinkMatch.All" Href="/">Главная</MudNavLink>
+            <MudNavLink Match="NavLinkMatch.All" Href="/arenda">Арендовать компьютер</MudNavLink>
+            <MudNavLink Match="NavLinkMatch.All" Href="/registration">Войти или зарегистрироваться</MudNavLink>
+            <MudNavLink Match="NavLinkMatch.All" Href="/profile">Профиль</MudNavLink>
+        </MudNavMenu>
+    </MudDrawer>
+    <MudMainContent>
+      @*  <MudContainer MaxWidth="MaxWidth.Large" Class="my-16 pt-16">*@
+
+            @Body
+      @*  </MudContainer>*@
+    </MudMainContent>
+</MudLayout>
+        <MudChipSet Filter="true" Mandatory="true" Class="mt-12">
+        </MudChipSet>
+
+@code {
+    ObjectPosition ImagePosition = ObjectPosition.Center;
+    bool _drawerOpen = true;
+    bool _opento = false;
+
+
+     void SetImagePosition(ObjectPosition value)
+    {
+        ImagePosition = value;
+    }
+
+    void ToggleDrawer()
+    {
+        _opento = !_opento;
+    }
+
+    void DrawerToggle()
+    {
+        _drawerOpen = !_drawerOpen;
+    }
+
+    public MudTheme mudTheme = new MudTheme
+        {
+
+            Palette = new Palette()
+            {
+                PrimaryDarken = Colors.Grey.Lighten5,
+                AppbarBackground = Colors.Grey.Default,
+                Primary = Colors.Grey.Default,
+            },
+        };
+    private bool _isDarkMode;
+}

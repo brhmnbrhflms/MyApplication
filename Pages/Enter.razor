@@ -1,0 +1,64 @@
+﻿@page "/enter"
+
+
+@using System.ComponentModel.DataAnnotations
+
+<MudGrid Justify="Justify.Center" Class="mt-4 mb-4">
+    <MudText Typo="Typo.h3">Вход</MudText>
+</MudGrid>
+
+<EditForm Model="@model" OnValidSubmit="OnValidSubmit">
+    <DataAnnotationsValidator />
+    <MudGrid Justify="Justify.Center">
+        <MudItem xs="12" sm="7">
+            <MudCard>
+                <MudCardContent>
+                    <MudTextField Label="Email" Class="mt-3"
+                                  @bind-Value="model.Email" For="@(() => model.Email)" />
+                    <MudTextField Label="Password" HelperText="Choose a strong password" Class="mt-3"
+                                  @bind-Value="model.Password" For="@(() => model.Password)" InputType="InputType.Password" />
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" Justify="Justify.Center">Войти</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+        <MudItem xs="12">
+            <MudText Typo="Typo.body2" Align="Align.Center">
+                Fill out the form correctly to see the success message.
+            </MudText>
+        </MudItem>
+    </MudGrid>
+</EditForm>
+@code {
+    RegisterAccountForm model = new RegisterAccountForm();
+    bool success;
+
+    public class RegisterAccountForm
+    {
+
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+
+        [Required]
+        [StringLength(30, ErrorMessage = "Слишком маленький", MinimumLength = 8)]
+        public string Password { get; set; }
+
+    }
+
+    private void OnValidSubmit(EditContext context)
+    {
+        success = true;
+        StateHasChanged();
+    }
+
+}
+<MudGrid Justify="Justify.Center">
+    <MudItem>
+        <MudText>Все еще не зарегистрированы?</MudText>
+    </MudItem>
+</MudGrid>
+<MudGrid Justify="Justify.Center">
+    <MudButton Variant="Variant.Text" Href="/registration">Зарегистрироваться</MudButton>
+</MudGrid>

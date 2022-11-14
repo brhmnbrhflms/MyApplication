@@ -1,0 +1,68 @@
+﻿@page "/"
+
+<PageTitle>Index</PageTitle>
+
+
+
+<MudPaper Class="pa-16 ma-2" Style="width:100%" Elevation="3">
+    <MudGrid Justify="Justify.Center">
+        <MudStack>
+
+            <MudImage Alt="LEGION" Src="img/LEGION.png"></MudImage>
+
+            <MudText Typo="Typo.h3">Лучший компьютерный клуб в Москве</MudText>
+
+        </MudStack>
+    </MudGrid>
+
+</MudPaper>
+
+
+<MudGrid Spacing="1" Justify="Justify.Center">
+    <MudItem>
+        <MudPaper Height="420px" Width="335px">
+            <MudImage Src="img/club2.png" />
+        </MudPaper>
+    </MudItem>
+    <MudItem>
+        <MudPaper Height="420px" Width="990px">
+            <MudText Typo="Typo.h4">Наш компьютерный клуб - один из лучших в Москве.</MudText>
+            <MudText Typo="Typo.h4">Более сотни игроков в неделю, более тысячи довольных клиентов.</MudText>
+            <MudText Typo="Typo.h4">
+                Мощные компьютеры с возможностью игры до 24 часов! Игры на любой вкус из
+                нашей постоянно пополняющейся библиотеки.
+            </MudText>
+            <MudText Typo="Typo.h4">Возможность вкусного перекуса.</MudText>
+            <MudText Typo="Typo.h4">Лучшие игровые девайсы.</MudText>
+            <MudText Typo="Typo.h4">Мониторы с 144 hz</MudText>
+            <MudText Typo="Typo.h4">Нас выбирают за качество!</MudText>
+        </MudPaper>
+    </MudItem>
+    <MudItem>
+        <MudPaper Height="420px" Width="560px">
+            <MudImage Src="img/stol1.png" />
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+
+<MudGrid Spacing="1" Justify="Justify.Center">
+    <MudItem>
+        <MudPaper Height="420px" Width="580px">
+            <MudText Typo="Typo.h2" Align="Align.Center"><b>Где</b> мы находимся?</MudText>
+        </MudPaper>
+    </MudItem>
+    <MudItem>
+        <MudPaper Height="420px" Width="545px">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2247.036951897584!2d37.695672366885155!3d55.723109990272725!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x414ab52c3338fb4b%3A0x448673a3691ed5e5!2sHOLY%20CLEAN!5e0!3m2!1sru!2sru!4v1667299740796!5m2!1sru!2sru" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </MudPaper>
+    </MudItem>
+    <MudItem>
+        <MudPaper Height="420px" Width="760px">
+                <MudText Typo="Typo.h2" Align="Align.Center">Работаем <b>круглосуточно!</b></MudText>
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+
+@code {
+    public int spacing { get; set; } = 2;
+}

@@ -1,0 +1,86 @@
+﻿@page "/registration"
+
+
+@using System.ComponentModel.DataAnnotations
+
+<MudGrid Justify="Justify.Center" Class="mt-4 mb-4">
+<MudText Typo="Typo.h3">Регистрация</MudText>
+</MudGrid>
+
+<EditForm Model="@model" OnValidSubmit="OnValidSubmit">
+    <DataAnnotationsValidator />
+    <MudGrid Justify="Justify.Center">
+        <MudItem xs="12" sm="7">
+            <MudCard>
+                <MudCardContent>
+                    <MudTextField Label="Имя"
+                                  @bind-Value="model.Username" For="@(() => model.Username)" />
+                    <MudTextField Label="Email" Class="mt-3"
+                                  @bind-Value="model.Email" For="@(() => model.Email)" />
+                    <MudTextField Label="Пароль" Class="mt-3"
+                                  @bind-Value="model.Password" For="@(() => model.Password)" InputType="InputType.Password" />
+                    <MudTextField Label="Пароль" HelperText="Повторите пароль" Class="mt-3"
+                                  @bind-Value="model.Password2" For="@(() => model.Password2)" InputType="InputType.Password" />
+                    <MudTextField Label="Карта" HelperText="Введите номер своей карты" Class="mt-3"
+                                  @bind-Value="model.Card" For="@(() => model.Card)" />
+                    <MudTextField Label="Телефон" HelperText="Введите свой телефон" Class="mt-3"
+                                  @bind-Value="model.Phone" For="@(() => model.Phone)" />
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Register</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+        
+        <MudItem xs="12">
+            <MudText Typo="Typo.body2" Align="Align.Center">
+                Fill out the form correctly to see the success message.
+            </MudText>
+        </MudItem>
+    </MudGrid>
+</EditForm>
+@code {
+    RegisterAccountForm model = new RegisterAccountForm();
+    bool success;
+
+    public class RegisterAccountForm
+    {
+        [Required]
+        [StringLength(16, ErrorMessage = "Максимум 16 символов")]
+        public string Username { get; set; }
+
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+
+        [Required]
+        [StringLength(30, ErrorMessage = "Слишком маленький", MinimumLength = 8)]
+        public string Password { get; set; }
+
+        [Required]
+        [Compare(nameof(Password))]
+        public string Password2 { get; set; }
+
+        [Required]
+        public long Card { get; set; }
+
+        [Required]
+        public long Phone { get; set; }
+
+    }
+
+    private void OnValidSubmit(EditContext context)
+    {
+        success = true;
+        StateHasChanged();
+    }
+
+}
+<MudGrid Justify="Justify.Center">
+    <MudItem>
+        <MudText>Уже зарегистрированы?</MudText>
+    </MudItem>
+</MudGrid>
+<MudGrid Justify="Justify.Center">
+    <MudButton Variant="Variant.Text" Href="/enter">Войти</MudButton>
+</MudGrid>

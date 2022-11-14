@@ -1,0 +1,76 @@
+﻿@page "/profile"
+
+<MudGrid Class="mt-4" Justify="Justify.Center">
+    <MudItem>
+        <MudPaper Height="100px" Width="500px">
+            <MudText Typo="Typo.h4"><b>Имя:</b></MudText>
+            <MudText Typo="Typo.h4">@currentUser.Name</MudText>
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+
+<MudGrid Justify="Justify.Center">
+    <MudItem>
+        <MudPaper Height="100px" Width="500px">
+            <MudText Typo="Typo.h4"><b>Телефон:</b></MudText>
+            <MudText Typo="Typo.h4">@currentUser.Phone</MudText>
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+
+<MudGrid Justify="Justify.Center">
+    <MudItem>
+        <MudPaper Height="100px" Width="500px">
+            <MudText Typo="Typo.h4"><b>Почта:</b></MudText>
+            <MudText Typo="Typo.h4">@currentUser.Email</MudText>
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+
+<MudGrid Justify="Justify.Center">
+    <MudItem>
+        <MudPaper Height="100px" Width="500px">
+            <MudText Typo="Typo.h4"><b>Карта:</b></MudText>
+            <MudText Typo="Typo.h4">Заканчивается на @currentUser.Card</MudText>
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+<MudGrid Justify="Justify.Center">
+    <MudItem>
+        <MudPaper Height="100px" Width="500px">
+            <MudText Typo="Typo.h4"><b>Всего было аренд:</b></MudText>
+            <MudText Typo="Typo.h4">@currentUser.Arenda</MudText>
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+
+<MudGrid Justify="Justify.Center">
+    <MudItem>
+        <MudPaper Height="100px" Width="500px">
+            <MudText Typo="Typo.h4"><b>Действует ли сейчас аренда?:</b></MudText>
+            <MudText Typo="Typo.h4">@currentUser.Arenda2</MudText>
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+@code {
+    class User
+    {
+        public string Name { get; set; }
+        public long Phone { get; set; }
+        public string Email { get; set; }
+        public int Card { get; set; }
+        public int Arenda { get; set; }
+        public string Arenda2 { get; set; }
+    }
+
+    User currentUser = new User
+        {
+            Name = "Кто-то",
+            Phone = 79999999999,
+            Email = "ashhkh@gmail.com",
+            Card = 1768,
+            Arenda = 2,
+            Arenda2 = "Да",
+
+        };
+    }

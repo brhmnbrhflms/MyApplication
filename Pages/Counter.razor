@@ -1,0 +1,115 @@
+﻿@page "/arenda"
+@inject NavigationManager Navigation
+
+<PageTitle>Arenda</PageTitle>
+<MudGrid Justify="Justify.Center" Class="mt-4">
+    <MudText Typo="Typo.h3" Class="mt-4">Аренда</MudText>
+</MudGrid>
+
+<MudGrid Class="mt-4" Justify="Justify.Center" Spacing="2">
+    <MudItem>
+        <MudPaper Class="mt-4" Width="300px" Height="150">
+            <MudText><b>АРЕНДА КОМПЬЮТЕРА</b></MudText>
+        </MudPaper>
+    </MudItem>
+    <MudItem>
+        <MudPaper Class="mt-4" Width="300px" Height="150">
+            <MudText><b>ВРЕМЯ</b></MudText>
+        </MudPaper>
+    </MudItem>
+    <MudItem>
+        <MudPaper Class="mt-4" Width="300px" Height="150">
+            <MudText><b>СТОИМОСТЬ</b></MudText>
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+<MudPaper>
+    <MudChip>@state</MudChip>
+
+    @foreach (var arenda in arendas)
+    {
+        <MudGrid Justify="Justify.Center" Spacing="2">
+            <MudItem>
+                <MudPaper Width="300px" Height="150">
+                    <MudText>@arenda.Name</MudText>
+                </MudPaper>
+            </MudItem>
+            <MudItem>
+                <MudPaper Width="300px" Height="150">
+                    <MudText>@arenda.Time</MudText>
+                </MudPaper>
+            </MudItem>
+            <MudItem>
+                <MudPaper Width="300px" Height="150">
+                    <MudText>@arenda.Cost</MudText>
+                </MudPaper>
+            </MudItem>
+        </MudGrid>
+        <MudButton Variant="Variant.Filled" Color="Color.Dark" OnClick="@(() => OnButtonClicked(arenda))">Оформить</MudButton>
+
+
+    }
+</MudPaper>
+
+@code {
+    [Inject] private IDialogService DialogService { get; set; }
+    string state = "Message box hasn't been opened yet";
+    private async Task OnButtonClicked(Arenda1 arenda)
+    {
+
+        bool? result = await DialogService.ShowMessageBox(
+            "Warning",
+            $"{arenda.Name}",
+            yesText: "Оформить", cancelText: "Отмена");
+        state = result == null ? "Отмена" : "Оформить";
+        if (state == "Оформить")
+        {
+            Navigation.NavigateTo("/papage");
+        }
+        StateHasChanged();
+    }
+    class Arenda1
+    {
+        public string Name { get; set; }
+        public string Time { get; set; }
+        public string Cost { get; set; }
+    }
+    Arenda1[] arendas = new Arenda1[]{
+        new Arenda1 {
+         Name = "Пакет 'Утро'",
+         Time = "Понедельник-пятница с 7:00 до 14:00",
+         Cost = "349 руб.",
+        },
+
+        new Arenda1{
+            Name = "Пакет 'Утро' (Выходные) ",
+            Time = "Суббота-воскресенье с 7:00 до 14:00",
+            Cost = "449 руб.",
+        },
+
+        new Arenda1{
+            Name = "Пакет 'День'",
+            Time = "Понедельник-пятница с 14:00 до 22:00",
+            Cost = "449 руб.",
+        },
+
+        new Arenda1{
+            Name = "Пакет 'День' (выходные)",
+            Time = "Суббота-воскресенье с 14:00 до 22:00",
+            Cost = "499 руб.",
+        },
+
+        new Arenda1{
+            Name = "Пакет 'Ночевка'",
+            Time = "Понедельник-пятница с 22:00 до 8:00",
+            Cost = "399 руб.",
+        },
+
+        new Arenda1{
+            Name = "Пакет 'Ночевка' (выходные)",
+            Time = "Суббота-воскресенье с 22:00 до 8:00",
+            Cost = "449 руб.",
+        },
+    };
+
+}

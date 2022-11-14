@@ -1,0 +1,65 @@
+﻿@page "/papage"
+
+
+@using System.ComponentModel.DataAnnotations
+
+<EditForm Model="@model" OnValidSubmit="OnValidSubmit">
+    <DataAnnotationsValidator />
+    <MudGrid Justify="Justify.Center">
+        <MudItem xs="12" sm="7">
+            <MudCard>
+                <MudCardContent>
+                    <MudDatePicker Label="Дата" @bind-Date="date" ReadOnly="true" HelperText="Дата, на которую назначена аренда" Class="mt-3" />
+                    <MudSelect @bind-Value="@country" Label="Наборы" Variant="Variant.Outlined" HelperText="Выберите набор" Class="mt-3">
+                        <MudSelectItem Value="@("Пакет 'Утро'")" />
+                        <MudSelectItem Value="@("Пакет 'Утро' (Выходные)")" />
+                        <MudSelectItem Value="@("Пакет 'День'")" />
+                        <MudSelectItem Value="@("Пакет 'День' (Выходные)")" />
+                        <MudSelectItem Value="@("Пакет 'Ночевка'")" />
+                        <MudSelectItem Value="@("Пакет 'Ночевка' (Выходные)")" />
+                    </MudSelect>
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Оформить</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+        <MudItem xs="12">
+            <MudText Typo="Typo.body2" Align="Align.Center">
+                Fill out the form correctly to see the success message.
+            </MudText>
+        </MudItem>
+    </MudGrid>
+</EditForm>
+@code {
+    RegisterAccountForm model = new RegisterAccountForm();
+    bool success;
+
+    public class RegisterAccountForm
+    {
+        [Required]
+        public string Username { get; set; }
+
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+
+        [Required]
+        [StringLength(11, ErrorMessage = "Неправильно набран номер.", MinimumLength = 11)]
+        public string Phone { get; set; }
+
+
+    }
+
+    private void OnValidSubmit(EditContext context)
+    {
+        success = true;
+        StateHasChanged();
+    }
+
+}
+
+        @code{
+    string country = "Пакет 'Утро'";
+    DateTime? date = DateTime.UtcNow;
+        }
